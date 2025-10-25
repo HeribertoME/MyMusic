@@ -4,5 +4,5 @@ data class AlbumUi(
     val id: String,
     val name: String,
     val coverUrl: String?,
-    val subtitle: String?  // release date
+    val subtitle: String?  // release year
 )

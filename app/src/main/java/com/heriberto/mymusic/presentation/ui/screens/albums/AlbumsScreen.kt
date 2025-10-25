@@ -14,6 +14,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -22,7 +23,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.heriberto.mymusic.presentation.ui.components.ArtistCard
 import com.heriberto.mymusic.presentation.ui.components.EmptyState
 import com.heriberto.mymusic.presentation.ui.components.ErrorState
 import com.heriberto.mymusic.presentation.ui.components.LoadingList
@@ -59,22 +59,28 @@ fun AlbumsScreen(
                     EmptyState(title = "Sin álbumes", subtitle = "No hay resultados.")
                 } else {
                     LazyColumn(
-                        contentPadding = PaddingValues(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(bottom = 24.dp),
                     ) {
+                        item {
+                            Text(
+                                text = "Álbumes",
+                                style = MaterialTheme.typography.titleLarge,
+                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                            )
+                        }
                         items(
                             count = albums.itemCount,
                             key = { index -> albums[index]?.id ?: index },
-                            contentType = { _ -> "album" }
                         ) { index ->
                             val album = albums[index]
                             if (album != null) {
-                                // todo create a AlbumCard
-                                ArtistCard(
+                                AlbumCard(
                                     name = album.name,
-                                    imageUrl = album.coverUrl,
-                                    onClick = { onAlbumClick(album.id, album.name) }
+                                    year = album.subtitle,
+                                    coverUrl = album.coverUrl,
+                                    onClick = { onAlbumClick(album.id, album.name) },
+                                    showDivider = index < albums.itemCount - 1
                                 )
                             } else {
                                 SkeletonItem(rememberShimmerBrush())
