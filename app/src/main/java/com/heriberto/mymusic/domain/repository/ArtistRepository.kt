@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ArtistRepository {
     fun getArtistsPaged(): Flow<PagingData<Artist>>
+    fun getArtists(): Flow<List<Artist>>
 }

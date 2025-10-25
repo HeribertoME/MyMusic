@@ -5,6 +5,7 @@ import androidx.paging.PagingState
 import com.heriberto.mymusic.data.datasource.remote.RemoteDataSource
 import com.heriberto.mymusic.data.datasource.remote.SpotifyArtistIds
 import com.heriberto.mymusic.data.datasource.remote.network.config.NetworkResult
+import com.heriberto.mymusic.data.mapper.toDomain
 import com.heriberto.mymusic.domain.model.Artist
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -31,7 +32,7 @@ class ArtistsRemoteOneShotPagingSource(
                     remote.getFixedArtists(SpotifyArtistIds.ids)
                 }
                 when (result) {
-                    is NetworkResult.Success -> cache = result.data
+                    is NetworkResult.Success -> cache = result.data.map { it.toDomain() }
                     is NetworkResult.Error -> {
                         val ex = IllegalStateException(result.message ?: "Error al cargar artistas (${result.code})", result.cause)
                         return LoadResult.Error(ex)
