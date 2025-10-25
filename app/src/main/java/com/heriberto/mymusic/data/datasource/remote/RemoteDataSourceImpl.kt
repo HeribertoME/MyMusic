@@ -4,6 +4,7 @@ import com.heriberto.mymusic.data.datasource.remote.network.api.SpotifyApi
 import com.heriberto.mymusic.data.datasource.remote.network.config.ApiCall
 import com.heriberto.mymusic.data.datasource.remote.network.config.NetworkResult
 import com.heriberto.mymusic.data.datasource.remote.network.responses.ArtistDto
+import com.heriberto.mymusic.data.datasource.remote.network.responses.albums.ArtistAlbumsResponse
 import com.squareup.moshi.Moshi
 import javax.inject.Inject
 
@@ -17,6 +18,24 @@ class RemoteDataSourceImpl @Inject constructor(
             val csv = ids.joinToString(",")
             val envelope = api.getSeveralArtists(csv)
             envelope.artists
+        }
+    }
+
+    override suspend fun getArtistAlbumsPage(
+        artistId: String,
+        limit: Int,
+        offset: Int,
+        includeGroups: String,
+        market: String?
+    ): NetworkResult<ArtistAlbumsResponse> {
+        return ApiCall.execute(moshi) {
+            api.getArtistAlbums(
+                artistId = artistId,
+                includeGroups = includeGroups,
+                limit = limit,
+                offset = offset,
+                market = market
+            )
         }
     }
 }
