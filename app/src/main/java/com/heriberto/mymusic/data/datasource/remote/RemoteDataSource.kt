@@ -3,6 +3,7 @@ package com.heriberto.mymusic.data.datasource.remote
 import com.heriberto.mymusic.data.datasource.remote.network.config.NetworkResult
 import com.heriberto.mymusic.data.datasource.remote.network.responses.ArtistDto
 import com.heriberto.mymusic.data.datasource.remote.network.responses.albums.ArtistAlbumsResponse
+import com.heriberto.mymusic.data.datasource.remote.network.responses.tracks.AlbumTracksResponse
 
 interface RemoteDataSource {
     suspend fun getFixedArtists(ids: List<String>): NetworkResult<List<ArtistDto>>
@@ -13,4 +14,9 @@ interface RemoteDataSource {
         includeGroups: String = "album,single",
         market: String? = null
     ): NetworkResult<ArtistAlbumsResponse>
+    suspend fun getAlbumTracksPage(
+        albumId: String,
+        limit: Int,
+        offset: Int
+    ): NetworkResult<AlbumTracksResponse>
 }

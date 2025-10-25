@@ -35,7 +35,7 @@ fun AlbumsScreen(
     artistName: String,
     albums: LazyPagingItems<AlbumUi>,
     onBack: () -> Unit,
-    onAlbumClick: (id: String, name: String) -> Unit
+    onAlbumClick: (id: String, name: String, coverUrl: String?) -> Unit
 ) {
     Column(Modifier.fillMaxSize()) {
         TopAppBar(
@@ -79,7 +79,13 @@ fun AlbumsScreen(
                                     name = album.name,
                                     year = album.subtitle,
                                     coverUrl = album.coverUrl,
-                                    onClick = { onAlbumClick(album.id, album.name) },
+                                    onClick = {
+                                        onAlbumClick(
+                                            album.id,
+                                            album.name,
+                                            album.coverUrl
+                                        )
+                                    },
                                     showDivider = index < albums.itemCount - 1
                                 )
                             } else {

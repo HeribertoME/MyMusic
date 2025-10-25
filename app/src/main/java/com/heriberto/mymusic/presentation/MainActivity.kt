@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.heriberto.mymusic.presentation.ui.screens.albums.AlbumsRoute
 import com.heriberto.mymusic.presentation.ui.screens.artists.ArtistRoute
+import com.heriberto.mymusic.presentation.ui.screens.tracks.TracksRoute
 import com.heriberto.mymusic.ui.theme.MyMusicTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,8 +50,24 @@ class MainActivity : ComponentActivity() {
                             )
                         ) {
                             AlbumsRoute(
-                                onBack = { nav.popBackStack() }
+                                onBack = { nav.popBackStack() },
+                                onAlbumClick = { albumId, albumName, cover, artistName ->
+                                    val coverEnc = Uri.encode(cover.orEmpty())
+                                    val artistEnc = Uri.encode(artistName)
+                                    nav.navigate("album/$albumId/${Uri.encode(albumName)}?cover=$coverEnc&artist=$artistEnc")
+                                }
                             )
+                        }
+                        composable(
+                            route = "album/{albumId}/{albumName}?cover={cover}&artist={artist}",
+                            arguments = listOf(
+                                navArgument("albumId") { type = NavType.StringType },
+                                navArgument("albumName") { type = NavType.StringType },
+                                navArgument("cover") { type = NavType.StringType; defaultValue = "" },
+                                navArgument("artist") { type = NavType.StringType; defaultValue = "" }
+                            )
+                        ) {
+                            TracksRoute(onBack = { nav.popBackStack() })
                         }
                     }
                 }

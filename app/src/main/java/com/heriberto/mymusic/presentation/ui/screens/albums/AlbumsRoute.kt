@@ -7,6 +7,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 @Composable
 fun AlbumsRoute(
     onBack: () -> Unit,
+    onAlbumClick: (albumId: String, albumName: String, cover: String?, artistName: String) -> Unit,
     viewModel: AlbumsViewModel = hiltViewModel()
 ) {
     val lazyItems = viewModel.albumsPaging.collectAsLazyPagingItems()
@@ -14,6 +15,8 @@ fun AlbumsRoute(
         artistName = viewModel.artistName,
         albums = lazyItems,
         onBack = onBack,
-        onAlbumClick = { _, _ -> /* todo navigate to tracks */ }
+        onAlbumClick = { id, name, cover ->
+            onAlbumClick(id, name, cover, viewModel.artistName)
+        }
     )
 }
