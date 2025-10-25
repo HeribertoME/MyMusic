@@ -36,7 +36,7 @@ fun LoadingList() {
 }
 
 @Composable
-private fun rememberShimmerBrush(): Brush {
+fun rememberShimmerBrush(): Brush {
     val transition = rememberInfiniteTransition(label = "shimmer")
     val targetValue = 1000f
     val translateAnim by transition.animateFloat(
@@ -60,7 +60,7 @@ private fun rememberShimmerBrush(): Brush {
 }
 
 @Composable
-private fun SkeletonItem(shimmerBrush: Brush) {
+fun SkeletonItem(shimmerBrush: Brush) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
