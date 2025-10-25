@@ -1,4 +1,4 @@
-package com.heriberto.mymusic.presentation.ui.screens
+package com.heriberto.mymusic.presentation.ui.screens.artists
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -24,18 +23,8 @@ import com.heriberto.mymusic.ui.theme.MyMusicTheme
 import com.heriberto.mymusic.ui.theme.SkyBlue
 import com.heriberto.mymusic.ui.theme.Teal
 
-/**
- * UI model por this screen
- */
-data class ArtistUi(
-    val id: String,
-    val name: String,
-    val imageUrl: String?
-)
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ArtistListScreen(
+fun ArtistScreen(
     artists: List<ArtistUi>,
     isLoading: Boolean,
     errorMessage: String?,
@@ -95,7 +84,7 @@ fun ArtistListScreen(
 @Composable
 private fun ArtistListScreenPreview() {
     MyMusicTheme {
-        ArtistListScreen(
+        ArtistScreen(
             artists = listOf(
                 ArtistUi("1", "Daft Punk", "https://i.scdn.co/image/ab6761610000e5ebc6fe…"),
                 ArtistUi("2", "Tame Impala", null),

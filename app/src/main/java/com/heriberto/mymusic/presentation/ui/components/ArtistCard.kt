@@ -57,19 +57,6 @@ fun ArtistCard(
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                AssistChip(
-                    onClick = onClick,
-                    label = { Text("Ver álbumes") },
-                    leadingIcon = {},
-                    colors = AssistChipDefaults.assistChipColors(
-                        containerColor = Teal.copy(alpha = 0.12f),
-                        labelColor = Navy
-                    ),
-                    border = AssistChipDefaults.assistChipBorder(
-                        enabled = true,
-                        borderColor = Teal.copy(alpha = 0.25f)
-                    )
-                )
             }
             Icon(
                 imageVector = Icons.Rounded.ChevronRight,

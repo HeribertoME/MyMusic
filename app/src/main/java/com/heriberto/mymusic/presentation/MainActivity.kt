@@ -8,10 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
-import com.heriberto.mymusic.presentation.ui.screens.ArtistListScreen
-import com.heriberto.mymusic.presentation.ui.screens.ArtistUi
+import com.heriberto.mymusic.presentation.ui.screens.artists.ArtistRoute
 import com.heriberto.mymusic.ui.theme.MyMusicTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,15 +21,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyMusicTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    ArtistListScreen(
-                        artists = listOf(
-                            ArtistUi("1", "Daft Punk", null),
-                            ArtistUi("2", "Tame Impala", null),
-                            ArtistUi("3", "Arctic Monkeys", null)
-                        ),
-                        isLoading = false,
-                        errorMessage = null,
-                        onArtistClick = { id, name -> /* todo navigate to albums */ }
+                    ArtistRoute(
+                        onArtistClick = { id, name ->
+                            // todo navigate to albums
+                        }
                     )
                 }
             }
