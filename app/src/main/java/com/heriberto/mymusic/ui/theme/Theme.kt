@@ -1,6 +1,5 @@
 package com.heriberto.mymusic.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -9,28 +8,39 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Teal,
+    onPrimary = Color.White,
+    secondary = SkyBlue,
+    onSecondary = Navy,
+    tertiary = Navy,
+    onTertiary = Color.White,
+    background = White,
+    onBackground = Ink,
+    surface = White,
+    onSurface = Ink,
+    surfaceVariant = Color(0xFFEFF7FA),
+    onSurfaceVariant = Navy,
+    outline = Color(0xFFBFDCEC)
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
+    primary = Teal,
+    onPrimary = Ink,
+    secondary = SkyBlue,
+    onSecondary = Ink,
+    tertiary = Navy,
     onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    background = Ink,
+    onBackground = White,
+    surface = Color(0xFF1F2B3E),
+    onSurface = White,
+    surfaceVariant = Color(0xFF24344C),
+    onSurfaceVariant = Color(0xFFCCE7F6),
+    outline = Color(0xFF476089)
 )
 
 @Composable
