@@ -21,6 +21,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SPOTIFY_CLIENT_ID", "\"2e7d2e9337844335aa9c91e99865f32c\"")
+        buildConfigField("String", "SPOTIFY_CLIENT_SECRET", "\"b51a244ebae64cb185e3a7a5c21f4b58\"")
     }
 
     buildTypes {
@@ -41,6 +44,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -65,6 +69,18 @@ dependencies {
     // Paging
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.compose)
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    // Okhttp
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+    // moshi
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+    // coroutines
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

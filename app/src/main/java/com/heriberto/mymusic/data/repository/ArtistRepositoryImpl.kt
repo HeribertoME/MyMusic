@@ -3,8 +3,8 @@ package com.heriberto.mymusic.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.heriberto.mymusic.data.datasource.local.LocalDataSource
-import com.heriberto.mymusic.data.datasource.paging.ArtistsPagingSource
+import com.heriberto.mymusic.data.datasource.paging.ArtistsRemoteOneShotPagingSource
+import com.heriberto.mymusic.data.datasource.remote.RemoteDataSource
 import com.heriberto.mymusic.domain.model.Artist
 import com.heriberto.mymusic.domain.repository.ArtistRepository
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +15,7 @@ import javax.inject.Singleton
 
 @Singleton
 class ArtistRepositoryImpl @Inject constructor(
-    private val local: LocalDataSource
+    private val remote: RemoteDataSource
 ) : ArtistRepository {
 
     override fun getArtistsPaged(): Flow<PagingData<Artist>> = flow {
@@ -27,7 +27,9 @@ class ArtistRepositoryImpl @Inject constructor(
                 prefetchDistance = 2,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { ArtistsPagingSource(local, pageSize) }
+            pagingSourceFactory = {
+                ArtistsRemoteOneShotPagingSource(remote = remote, pageSize = pageSize)
+            }
         ).flow
         emitAll(pageFlow)
     }
