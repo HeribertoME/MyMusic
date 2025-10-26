@@ -1,0 +1,30 @@
+{
+  "href": "https://api.spotify.com/v1/artists/xyz/albums?offset=0&limit=2",
+  "limit": 2,
+  "next": "https://api.spotify.com/v1/artists/xyz/albums?offset=2&limit=2",
+  "offset": 0,
+  "previous": null,
+  "total": 3,
+  "items": [
+    {
+      "album_type": "album",
+      "total_tracks": 10,
+      "id": "al_1",
+      "name": "Album One",
+      "images": [{ "url": "u1", "width": 640, "height": 640 }],
+      "release_date": "2020-01-01",
+      "release_date_precision": "day",
+      "album_group": "album"
+    },
+    {
+      "album_type": "album",
+      "total_tracks": 9,
+      "id": "al_2",
+      "name": "Album Two",
+      "images": [{ "url": "u2", "width": 640, "height": 640 }],
+      "release_date": "2019-05-10",
+      "release_date_precision": "day",
+      "album_group": "album"
+    }
+  ]
+}

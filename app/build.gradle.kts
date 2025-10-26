@@ -82,7 +82,25 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
+    // Unit test
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
+    testImplementation(libs.truth)
+    // Compose unit tests for components
+    testImplementation(platform(libs.androidx.compose.bom))
+    testImplementation(libs.androidx.ui.test.junit4)
+    // For network tests
+    // MockWebServer + OkHttp
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.okhttp)
+    // Moshi
+    testImplementation(libs.moshi.kotlin)
+    // Retrofit
+    testImplementation(libs.retrofit)
+    testImplementation(libs.retrofit.converter.moshi)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
