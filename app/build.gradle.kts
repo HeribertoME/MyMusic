@@ -1,3 +1,28 @@
+import java.util.Properties
+
+// Carga de local.properties
+val localProps = Properties().apply {
+    val f = rootProject.file("local.properties")
+    if (f.exists()) f.inputStream().use(::load)
+}
+
+val spotifyClientId = (localProps.getProperty("SPOTIFY_CLIENT_ID") ?: "").trim()
+val spotifyClientSecret = (localProps.getProperty("SPOTIFY_CLIENT_SECRET") ?: "").trim()
+
+// Warning of missing credentials
+if (spotifyClientId.isBlank() || spotifyClientSecret.isBlank()) {
+    logger.warn(
+        """
+        ⚠️  Spotify credentials missing.
+        Agrega en local.properties (raíz del proyecto):
+        SPOTIFY_CLIENT_ID=tu_client_id
+        SPOTIFY_CLIENT_SECRET=tu_client_secret
+
+        Se usarán valores placeholder para no fallar el build.
+        """.trimIndent()
+    )
+}
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -22,8 +47,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "SPOTIFY_CLIENT_ID", "\"2e7d2e9337844335aa9c91e99865f32c\"")
-        buildConfigField("String", "SPOTIFY_CLIENT_SECRET", "\"b51a244ebae64cb185e3a7a5c21f4b58\"")
+        buildConfigField("String", "SPOTIFY_CLIENT_ID", "\"$spotifyClientId\"")
+        buildConfigField("String", "SPOTIFY_CLIENT_SECRET", "\"$spotifyClientSecret\"")
     }
 
     buildTypes {
